@@ -1,18 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apppreciation !</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Appreciation 💜</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-pink-500 flex items-center justify-center min-h-screen p-4">
-    <div class="bg-white p-6 rounded-3xl shadow-2xl text-center w-full max-w-md">
-        <h1 class="text-2xl font-bold text-pink-400">Why You're My Bestie 💗😝</h1>
-        <p class="mt-2 text-gray-600 text-sm">Some reasons why I adore you 🥹🫶</p>
 
-        
+<body class="min-h-screen relative overflow-hidden animate-bg flex flex-col items-center justify-start py-6 sm:py-10 px-3 sm:px-4">
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+    <source src="./assets/love-song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Click sound effect -->
+<audio id="clickSound">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGGS57OihUhELTKXh8LdjHAU2jdXxzn0vBSp+zPDck0QKFV612+yrWBQLSKHe8sFuJAUrhM/y2Ik2Bhxounvr6aFTE" type="audio/wav">
+</audio>
+
+<!-- Confetti Container -->
+<canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+<!-- Floating Hearts -->
+<div class="hearts"></div>
+
+<!-- Floating Stars -->
+<div class="stars"></div>
+
+<!-- Sparkles -->
+<div class="sparkles"></div>
+
+<main class="w-full max-w-4xl text-center animate-fadeIn z-10 space-y-4 sm:space-y-6">
+
+<!-- Animated Quote Carousel -->
+<div class="bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 overflow-hidden">
+    <div id="quoteCarousel" class="min-h-[70px] sm:min-h-[80px] md:min-h-[90px] flex items-center justify-center px-2">
+        <p class="quote-text text-pink-600 text-sm sm:text-base md:text-lg lg:text-xl font-serif italic leading-relaxed"></p>
     </div>
+    <div class="flex justify-center gap-2 sm:gap-3 mt-3 sm:mt-4">
+        <span class="dot w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-pink-300 transition-all duration-300"></span>
+        <span class="dot w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-pink-300 transition-all duration-300"></span>
+        <span class="dot w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-pink-300 transition-all duration-300"></span>
+        <span class="dot w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-pink-300 transition-all duration-300"></span>
+    </div>
+</div>
+
+<!-- Title Section -->
+<div class="bg-white/70 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8">
+    <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-2 sm:mb-3">
+        Why You're My Bestie 💜
+    </h1>
+    <p class="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed">
+        Some reasons why I adore you 🫶
+    </p>
+    <p class="text-xs sm:text-sm md:text-base text-pink-600 mt-3 sm:mt-4 font-medium">
+        Tap on each photo to flip it! ✨
+    </p>
+</div>
+
+<!-- Photo Grid -->
+<div class="relative">
+    <div class="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
+        <!-- Photo Card 1 -->
+        <div class="flip-card w-full aspect-square" onclick="flipCard(this, 'photo1')">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="assets/picture1.jpeg" class="rounded-xl sm:rounded-2xl object-cover w-full h-full shadow-lg"/>
+                </div>
+                <div class="flip-card-back bg-gradient-to-br from-pink-400 to-pink-600 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 flex items-center justify-center">
+                    <p class="text-white text-xs sm:text-sm md:text-base font-medium leading-snug text-center px-1 sm:px-2">You always know how to make me smile! 💖</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Card 2 -->
+        <div class="flip-card w-full aspect-square" onclick="flipCard(this, 'photo2')">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="assets/picture2.jpeg" class="rounded-xl sm:rounded-2xl object-cover w-full h-full shadow-lg"/>
+                </div>
+                <div class="flip-card-back bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 flex items-center justify-center">
+                    <p class="text-white text-xs sm:text-sm md:text-base font-medium leading-snug text-center px-1 sm:px-2">We turn ordinary moments into extraordinary memories! 🌟</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Card 3 -->
+        <div class="flip-card w-full aspect-square" onclick="flipCard(this, 'photo3')">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="assets/picture3.jpeg" class="rounded-xl sm:rounded-2xl object-cover w-full h-full shadow-lg"/>
+                </div>
+                <div class="flip-card-back bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 flex items-center justify-center">
+                    <p class="text-white text-xs sm:text-sm md:text-base font-medium leading-snug text-center px-1 sm:px-2">Your loyalty means everything to me! 💕</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Card 4 -->
+        <div class="flip-card w-full aspect-square" onclick="flipCard(this, 'photo4')">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="assets/picture4.jpeg" class="rounded-xl sm:rounded-2xl object-cover w-full h-full shadow-lg"/>
+                </div>
+                <div class="flip-card-back bg-gradient-to-br from-fuchsia-400 to-fuchsia-600 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 flex items-center justify-center">
+                    <p class="text-white text-xs sm:text-sm md:text-base font-medium leading-snug text-center px-1 sm:px-2">You inspire me to be my best self! ✨</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- See Memories Button - Centered Below Grid -->
+    <div class="flex justify-center mt-4 sm:mt-6">
+        <a href="memories.html"
+             class="inline-block px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4
+          rounded-full text-sm sm:text-base md:text-lg font-semibold shadow-2xl
+          bg-pink-500 text-white glow-button
+          hover:bg-gradient-to-r hover:from-pink-500 hover:to-pink-400
+          hover:scale-105 active:scale-95 transition-all duration-500 z-20">
+             See our memories 💌
+        </a>
+    </div>
+</div>
+
+</main>
+
+<style>
+/* Background gradient animation - PINK THEME */
+body.animate-bg {
+    background: linear-gradient(120deg, #fecdd3, #fda4af, #fb7185, #f472b6, #ec4899);
+    background-size: 400% 400%;
+    animation: bgShift 12s ease infinite;
+}
+@keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn { animation: fadeIn 1.3s ease forwards; }
+
+/* Glowing button effect */
+.glow-button {
+    animation: glow 2s ease-in-out infinite;
+}
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.5); }
+    50% { box-shadow: 0 0 30px rgba(236, 72, 153, 0.8), 0 0 40px rgba(236, 72, 153, 0.6); }
+}
+
+/* Flip Card Styles */
+.flip-card {
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+}
+
+/* Quote carousel animation */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.quote-text {
+    animation: slideIn 0.8s ease;
+}
+
+.dot.active {
+    background-color: #ec4899;
+    transform: scale(1.3);
+}
+
+/* Floating hearts */
+.hearts span {
+    position: absolute;
+    bottom: -30px;
+    font-size: 18px;
+    animation: floatUpRotate 8s linear infinite;
+    opacity: 0.7;
+}
+
+@media (min-width: 640px) {
+    .hearts span {
+        font-size: 24px;
+    }
+}
+
+@keyframes floatUpRotate {
+    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+    30% { opacity: 0.8; }
+    100% { transform: translateY(-120vh) rotate(360deg) scale(1.4); opacity: 0; }
+}
+
+/* Floating stars */
+.stars span {
+    position: absolute;
+    bottom: -30px;
+    font-size: 16px;
+    animation: starFloat 9s linear infinite;
+    opacity: 0.75;
+}
+
+@media (min-width: 640px) {
+    .stars span {
+        font-size: 20px;
+    }
+}
+
+@keyframes starFloat {
+    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+    30% { opacity: 0.9; }
+    100% { transform: translateY(-120vh) rotate(-360deg) scale(1.5); opacity: 0; }
+}
+
+/* Floating sparkles */
+.sparkles span {
+    position: absolute;
+    font-size: 8px;
+    color: #fffacd;
+    opacity: 0.8;
+    animation: sparkleFloat 5s linear infinite;
+}
+
+@media (min-width: 640px) {
+    .sparkles span {
+        font-size: 10px;
+    }
+}
+
+@keyframes sparkleFloat {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    50% { opacity: 0.9; }
+    100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+}
+
+/* Ensure proper aspect ratio on all devices */
+.aspect-square {
+    aspect-ratio: 1 / 1;
+}
+</style>
+
+<script>
+// Quote Carousel
+const quotes = [
+    "\"A true friend is someone who sees the pain in your eyes while everyone else believes the smile on your face.\" 💕",
+    "\"Friends are the family we choose for ourselves.\" 🫶",
+    "\"Good friends are like stars, you don't always see them but you know they're always there.\" ⭐",
+    "\"Life is better with true friends by your side.\" 💖"
+];
+
+let currentQuote = 0;
+const quoteText = document.querySelector('.quote-text');
+const dots = document.querySelectorAll('.dot');
+
+function updateQuote() {
+    quoteText.style.opacity = '0';
     
+    setTimeout(() => {
+        quoteText.textContent = quotes[currentQuote];
+        quoteText.style.opacity = '1';
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentQuote);
+        });
+        
+        currentQuote = (currentQuote + 1) % quotes.length;
+    }, 300);
+}
+
+// Initialize first quote
+updateQuote();
+setInterval(updateQuote, 4000);
+
+// Flip Card Function with Confetti and Sound
+function flipCard(card, photoId) {
+    card.classList.toggle('flipped');
+    
+    // Play click sound
+    const clickSound = document.getElementById('clickSound');
+    clickSound.currentTime = 0;
+    clickSound.play().catch(() => {}); // Ignore if sound fails
+    
+    // Trigger confetti
+    if (!card.classList.contains('flipped')) {
+        createConfetti(card);
+    }
+}
+
+// Confetti Animation
+const canvas = document.getElementById('confettiCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+function createConfetti(element) {
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const confettiCount = window.innerWidth < 640 ? 20 : 30; // Less confetti on mobile
+    const confetti = [];
+    
+    const colors = ['#ec4899', '#f472b6', '#fb7185', '#fda4af', '#fbbf24', '#a78bfa'];
+    
+    for (let i = 0; i < confettiCount; i++) {
+        confetti.push({
+            x: centerX,
+            y: centerY,
+            vx: (Math.random() - 0.5) * 10,
+            vy: (Math.random() - 0.5) * 10 - 5,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            size: Math.random() * 8 + 4,
+            rotation: Math.random() * 360,
+            rotationSpeed: (Math.random() - 0.5) * 10
+        });
+    }
+    
+    function animateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        let stillAnimating = false;
+        
+        confetti.forEach((piece, index) => {
+            piece.vy += 0.3; // gravity
+            piece.x += piece.vx;
+            piece.y += piece.vy;
+            piece.rotation += piece.rotationSpeed;
+            
+            if (piece.y < canvas.height) {
+                stillAnimating = true;
+                
+                ctx.save();
+                ctx.translate(piece.x, piece.y);
+                ctx.rotate(piece.rotation * Math.PI / 180);
+                ctx.fillStyle = piece.color;
+                ctx.fillRect(-piece.size / 2, -piece.size / 2, piece.size, piece.size);
+                ctx.restore();
+            }
+        });
+        
+        if (stillAnimating) {
+            requestAnimationFrame(animateConfetti);
+        }
+    }
+    
+    animateConfetti();
+}
+
+// Floating hearts
+const heartsEmojis = ['💖', '💕', '💗', '💝', '💘'];
+const heartsContainer = document.querySelector('.hearts');
+
+function createHeart() {
+    const heart = document.createElement('span');
+    heart.textContent = heartsEmojis[Math.floor(Math.random() * heartsEmojis.length)];
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+    heart.style.animationDelay = Math.random() * 2 + 's';
+    heartsContainer.appendChild(heart);
+    
+    setTimeout(() => heart.remove(), 10000);
+}
+
+setInterval(createHeart, 800);
+for (let i = 0; i < 5; i++) setTimeout(createHeart, i * 300);
+
+// Floating stars
+const starsEmojis = ['⭐', '✨', '🌟', '💫'];
+const starsContainer = document.querySelector('.stars');
+
+function createStar() {
+    const star = document.createElement('span');
+    star.textContent = starsEmojis[Math.floor(Math.random() * starsEmojis.length)];
+    star.style.left = Math.random() * 100 + '%';
+    star.style.animationDuration = (Math.random() * 5 + 7) + 's';
+    star.style.animationDelay = Math.random() * 2 + 's';
+    starsContainer.appendChild(star);
+    
+    setTimeout(() => star.remove(), 12000);
+}
+
+setInterval(createStar, 1000);
+for (let i = 0; i < 4; i++) setTimeout(createStar, i * 400);
+
+// Floating sparkles
+const sparklesContainer = document.querySelector('.sparkles');
+
+function createSparkle() {
+    const sparkle = document.createElement('span');
+    sparkle.textContent = '✨';
+    sparkle.style.left = Math.random() * 100 + '%';
+    sparkle.style.bottom = Math.random() * 100 + '%';
+    sparkle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+    sparklesContainer.appendChild(sparkle);
+    
+    setTimeout(() => sparkle.remove(), 6000);
+}
+
+setInterval(createSparkle, 600);
+for (let i = 0; i < 8; i++) setTimeout(createSparkle, i * 200);
+</script>
+
 </body>
 </html>

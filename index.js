@@ -34,3 +34,4 @@
     for (let i = 0; i < 5; i++) {
       setTimeout(createFloatingEmoji, i * 300);
     }
+
