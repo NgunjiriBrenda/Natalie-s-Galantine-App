@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animated background */
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animated-bg {
+            background: linear-gradient(120deg, #fecdd3, #fda4af, #fb7185, #f472b6, #ec4899);
+            background-size: 400% 400%;
+            animation: bgShift 15s ease infinite;
+        }
+
+        /* Pulse animation */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f472b6;
+            animation: confettiFall 3s linear;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="animated-bg flex items-center justify-center min-h-screen p-4">
+    <div id="confettiContainer" class="fixed inset-0 pointer-events-none"></div>
+
+    <div class="bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8 max-w-md w-full text-center">
+        <!-- Question Section -->
+        <div id="questionSection">
+            <img src="https://media4.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MmRiMHYybTk3ejY4Z3l4aGgwZzRtc3dwNndqZ2R4eWRpbzF1NncxbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/cXYKQxjW1HLp2KMw09/giphy.webp" class="w-40 mx-auto rounded-xl shadow-lg"/>
+
+            <h1 class="text-3xl font-bold text-pink-500 mt-6">
+                Nicole Will you be my Galentine? ❤️
+            </h1>
+            <p class="text-gray-600 text-base mt-3">I promise snacks, gossip and memories too 😌</p>
+
+            <div class="flex justify-center gap-4 mt-8">
+                <button onclick="yesAnswer()" class="pulse-animation bg-pink-600 text-white px-8 py-3 rounded-full font-semibold hover:scale-110 transition-all duration-300 shadow-lg">
+                    Yes ❤️
+                </button>
+
+                <button id="noBtn" onclick="moveButton()" class="bg-gray-300 text-gray-700 px-8 py-3 rounded-full font-semibold hover:scale-105 transition-all duration-300 shadow-lg" style="transition: opacity 0.3s ease, transform 0.3s ease;">
+                    No 😭
+                </button>
+            </div>
+        </div>
+
+        <!-- Success Section (Hidden initially) -->
+        <div id="successSection" class="hidden">
+            <div class="text-7xl mb-4">🎉</div>
+            <img src="https://media.giphy.com/media/g5R9dok94mrIvplmZd/giphy.gif" class="w-56 h-56 mx-auto rounded-xl shadow-lg mb-4"/>
+            
+            <h1 class="text-3xl font-bold text-pink-600 mb-4">
+                Yaaay! 💖✨
+            </h1>
+            
+            <p class="text-gray-700 text-lg mb-4">
+                You just made my day bestie! Here's to snacks, gossip, and endless memories! 🌸💕
+            </p>
+            
+            <div class="text-5xl">
+                🎀💖🌟💕✨
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let clickCount = 0;
+
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            clickCount++;
+            
+            if (clickCount === 1) {
+                noBtn.textContent = "Are you sure? 🥺";
+            } else if (clickCount === 2) {
+                noBtn.textContent = "But... snacks! 🍿";
+            } else if (clickCount === 3) {
+                noBtn.textContent = "And gossip! ☕";
+            } else {
+                // Make the button disappear
+                noBtn.style.opacity = '0';
+                noBtn.style.pointerEvents = 'none';
+                
+                // Reappear in a random position after a short delay
+                setTimeout(() => {
+                    const x = (Math.random() - 0.5) * 300;
+                    const y = (Math.random() - 0.5) * 300;
+                    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+                    noBtn.style.opacity = '1';
+                    noBtn.style.pointerEvents = 'auto';
+                    
+                    // Change text randomly
+                    const texts = [
+                        "Nope! 😝",
+                        "Can't catch me! 🏃‍♀️",
+                        "Try again! 😜",
+                        "Almost! 😂",
+                        "Keep trying! 💨"
+                    ];
+                    noBtn.textContent = texts[Math.floor(Math.random() * texts.length)];
+                }, 300);
+            }
+        }
+
+        function yesAnswer() {
+            // Hide question section
+            document.getElementById('questionSection').classList.add('hidden');
+            
+            // Show success section
+            document.getElementById('successSection').classList.remove('hidden');
+            
+            // Trigger confetti
+            createConfetti();
+        }
+
+        function createConfetti() {
+            const colors = ['#ec4899', '#f472b6', '#fb7185', '#fda4af', '#fecdd3'];
+            const confettiContainer = document.getElementById('confettiContainer');
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    confettiContainer.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+    </script>
+</body>
+</html>

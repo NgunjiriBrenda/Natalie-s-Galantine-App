@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Our Memories </title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  /* Fade in */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn { animation: fadeIn 1s ease forwards; }
+
+  /* Animated background */
+  @keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .animated-bg {
+    background-size: 400% 400%;
+    animation: bgShift 20s ease infinite;
+  }
+
+  /* Floating items */
+  .float {
+    position: absolute;
+    pointer-events: none;
+    animation: floatUp linear infinite;
+  }
+  
+  .heart { font-size: 1.8rem; opacity: 0.5; }
+  .flower { font-size: 2.5rem; opacity: 0.6; }
+  .sparkle { font-size: 1.5rem; opacity: 0.7; }
+  .cute-emoji { font-size: 2rem; opacity: 0.5; }
+
+  @keyframes floatUp {
+    from { transform: translateY(110vh) rotate(0deg); }
+    to { transform: translateY(-130vh) rotate(360deg); }
+  }
+
+  /* Modal */
+  .modal { display: none; }
+  .modal.active { display: flex; }
+</style>
+</head>
+
+<body class="relative min-h-screen overflow-hidden animated-bg
+             bg-gradient-to-br from-purple-200 via-purple-300 to-purple-500
+             flex flex-col items-center justify-center px-4 py-8">
+
+  <!-- Floating Hearts -->
+  <span class="float heart" style="left: 10%; animation-duration: 18s;">💜</span>
+  <span class="float heart" style="left: 40%; animation-duration: 22s;">💖</span>
+  <span class="float heart" style="left: 70%; animation-duration: 20s;">💗</span>
+  <span class="float heart" style="left: 85%; animation-duration: 19s;">💕</span>
+
+  <!-- Floating Flowers -->
+  <span class="float flower" style="left: 5%; animation-duration: 25s; animation-delay: 2s;">🌸</span>
+  <span class="float flower" style="left: 25%; animation-duration: 23s; animation-delay: 5s;">🌺</span>
+  <span class="float flower" style="left: 55%; animation-duration: 27s; animation-delay: 1s;">🌼</span>
+  <span class="float flower" style="left: 80%; animation-duration: 24s; animation-delay: 3s;">🌷</span>
+  <span class="float flower" style="left: 90%; animation-duration: 26s; animation-delay: 4s;">🌹</span>
+
+  <!-- Floating Sparkles -->
+  <span class="float sparkle" style="left: 20%; animation-duration: 15s; animation-delay: 1s;">✨</span>
+  <span class="float sparkle" style="left: 50%; animation-duration: 17s; animation-delay: 3s;">⭐</span>
+  <span class="float sparkle" style="left: 75%; animation-duration: 16s; animation-delay: 2s;">💫</span>
+
+  <!-- Floating Cute Emojis -->
+  <span class="float cute-emoji" style="left: 15%; animation-duration: 21s; animation-delay: 2s;">🦋</span>
+  <span class="float cute-emoji" style="left: 35%; animation-duration: 19s; animation-delay: 4s;">🎀</span>
+  <span class="float cute-emoji" style="left: 60%; animation-duration: 20s; animation-delay: 1s;">🌈</span>
+  <span class="float cute-emoji" style="left: 82%; animation-duration: 22s; animation-delay: 3s;">☁️</span>
+  <span class="float cute-emoji" style="left: 95%; animation-duration: 18s; animation-delay: 5s;">🧸</span>
+
+  <!-- Title -->
+  <h1 class="text-2xl sm:text-3xl font-bold text-purple-800 mb-6 text-center animate-fadeIn z-10">
+    Some of our special moments 💜
+  </h1>
+
+  <!-- Image Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 md:gap-8 max-w-2xl w-full mb-6 animate-fadeIn z-10">
+
+    <div onclick="openModal(0)"
+         class="cursor-pointer bg-white/70 backdrop-blur-md rounded-2xl overflow-hidden
+                shadow-[0_15px_30px_rgba(128,90,213,0.35)]
+                hover:shadow-[0_20px_40px_rgba(128,90,213,0.5)]
+                transition-shadow duration-500">
+      <img src="assets/picture5.jpeg"
+           class="w-full h-48 sm:h-52 md:h-56 object-cover rounded-xl transition-transform duration-500 hover:scale-105">
+    </div>
+
+    <div onclick="openModal(1)"
+         class="cursor-pointer bg-white/70 backdrop-blur-md rounded-2xl overflow-hidden
+                shadow-[0_15px_30px_rgba(128,90,213,0.35)]
+                hover:shadow-[0_20px_40px_rgba(128,90,213,0.5)]
+                transition-shadow duration-500">
+      <img src="assets/picture6.jpeg"
+           class="w-full h-48 sm:h-52 md:h-56 object-cover rounded-xl transition-transform duration-500 hover:scale-105">
+    </div>
+
+    <div onclick="openModal(2)"
+         class="cursor-pointer bg-white/70 backdrop-blur-md rounded-2xl overflow-hidden
+                shadow-[0_15px_30px_rgba(128,90,213,0.35)]
+                hover:shadow-[0_20px_40px_rgba(128,90,213,0.5)]
+                transition-shadow duration-500">
+      <img src="assets/picture7.jpeg"
+           class="w-full h-48 sm:h-52 md:h-56 object-cover rounded-xl transition-transform duration-500 hover:scale-105">
+    </div>
+
+    <div onclick="openModal(3)"
+         class="cursor-pointer bg-white/70 backdrop-blur-md rounded-2xl overflow-hidden
+                shadow-[0_15px_30px_rgba(128,90,213,0.35)]
+                hover:shadow-[0_20px_40px_rgba(128,90,213,0.5)]
+                transition-shadow duration-500">
+      <img src="assets/picture8.jpeg"
+           class="w-full h-48 sm:h-52 md:h-56 object-cover rounded-xl transition-transform duration-500 hover:scale-105">
+    </div>
+
+  </div>
+
+  <!-- Button -->
+  <a href="question.html"
+     class="inline-block bg-gradient-to-r from-purple-600 to-pink-500
+            text-white px-6 py-3 rounded-full text-sm sm:text-base
+            font-medium shadow-xl hover:scale-105
+            active:scale-95 transition-all duration-500 z-10">
+    haya inua mkono kama uko ready 😂💌🎁
+  </a>
+
+  <!-- Modal -->
+  <div id="modal"
+       class="modal fixed inset-0 bg-black/40 backdrop-blur-sm
+              items-center justify-center z-50 px-4">
+    <div class="bg-white rounded-3xl p-6 max-w-sm text-center shadow-2xl animate-fadeIn">
+      <p id="modalText" class="text-gray-700 text-lg mb-4"></p>
+      <button onclick="closeModal()"
+              class="bg-purple-600 text-white px-6 py-2 rounded-full hover:scale-105 transition">
+        Close 💜
+      </button>
+    </div>
+  </div>
+
+  <script src="./index.js"></script>
+
+</body>
+</html>

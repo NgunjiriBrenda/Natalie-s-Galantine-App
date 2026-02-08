@@ -198,3 +198,21 @@ function createSparkle() {
 
 setInterval(createSparkle, 600);
 for (let i = 0; i < 8; i++) setTimeout(createSparkle, i * 200);
+
+
+const messages = [
+      "You're the kind of friend everyone dreams of having 💖✨",
+      "Life is so much better with you in it, bestie 🌟💕",
+      "You make even the boring days feel like an adventure 🎀😊",
+      "I'm so grateful the universe brought us together 🌸💜"
+    ];
+    
+
+    function openModal(index) {
+      document.getElementById("modalText").innerText = messages[index];
+      document.getElementById("modal").classList.add("active");
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.remove("active");
+    }

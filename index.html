@@ -1,419 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Appreciation 💜</title>
-<script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galantine Surprise!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+  
+    .flower {
+      position: absolute;
+      animation: floatUp linear infinite;
+      user-select: none;
+      pointer-events: none;
+      font-size: 1.5rem;
+    }
+    
+    @media (min-width: 640px) {
+      .flower {
+        font-size: 2rem;
+      }
+    }
+    
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      30% { opacity: 0.8; }
+      100% { transform: translateY(-120vh) scale(1.6); opacity: 0; }
+    }
+
+    .zoom-in {
+      animation: zoomIn 1.5s ease-out forwards;
+    }
+
+    @keyframes zoomIn {
+      0% { 
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% { 
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
+<body class="bg-gradient-to-br from-pink-500 via-pink-200 to-pink-300 flex flex-col items-center justify-center min-h-screen overflow-hidden relative px-4 sm:px-0 py-8">
 
-<body class="min-h-screen relative overflow-hidden animate-bg flex flex-col items-center justify-center py-3 sm:py-6 px-3 sm:px-4">
+  <!-- Floating flowers container -->
+  <div id="flowersContainer"></div>
 
+  <img 
+    src="./assets/her.jpeg"
+    alt="Her Picture"
+    class="zoom-in w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto rounded-3xl object-cover 
+           shadow-[0_20px_40px_rgba(147,51,234,0.3)] sm:shadow-[0_25px_50px_rgba(147,51,234,0.35)] mb-6 sm:mb-8"
+  />
 
-<!-- Click sound effect -->
-<audio id="clickSound">
-    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGGS57OihUhELTKXh8LdjHAU2jdXxzn0vBSp+zPDck0QKFV612+yrWBQLSKHe8sFuJAUrhM/y2Ik2Bhxounvr6aFTE" type="audio/wav">
-</audio>
+  <div class="bg-pink-400 p-4 sm:p-6 rounded-3xl shadow-2xl text-center w-11/12 sm:w-9/12 max-w-md relative z-10 mb-6">
+    <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mt-1 sm:mt-2">Hey Nicole ❤️💋</h1>
 
-<!-- Confetti Container -->
-<canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+    <p class="mt-3 sm:mt-2 text-white text-sm sm:text-base md:text-lg font-serif mx-auto max-w-[250px] sm:max-w-[250px] leading-snug sm:leading-tight px-2 sm:px-0">
+      My Hotee Hotee bestfriend 🫶💕 Click the button below !
+    </p>
+  </div>
 
-<!-- Floating Hearts -->
-<div class="hearts"></div>
+  <a 
+     href="./appreciation.html"
+     class="inline-block px-8 py-3 sm:px-10 sm:py-4 rounded-full text-base sm:text-lg font-medium shadow-xl 
+     bg-pink-400 text-white
+     hover:bg-gradient-to-r hover:from-pink-100
+     hover:text-white
+     hover:scale-105 active:scale-95 transition-all duration-500"
+  >
+    Let's go 💌 🎉
+  </a> 
 
-<!-- Floating Stars -->
-<div class="stars"></div>
-
-<!-- Sparkles -->
-<div class="sparkles"></div>
-
-<main class="w-full max-w-4xl text-center animate-fadeIn z-10 space-y-3 sm:space-y-4">
-
-<!-- Animated Quote Carousel -->
-<div class="bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-xl p-3 sm:p-5 overflow-hidden">
-    <div id="quoteCarousel" class="min-h-[50px] sm:min-h-[60px] flex items-center justify-center px-2">
-        <p class="quote-text text-pink-600 text-xs sm:text-sm md:text-base font-serif italic leading-snug max-w-[280px] sm:max-w-xs md:max-w-md mx-auto"></p>
-    </div>
-    <div class="flex justify-center gap-1.5 sm:gap-2 mt-2 sm:mt-3">
-        <span class="dot w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-pink-300 transition-all duration-300"></span>
-        <span class="dot w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-pink-300 transition-all duration-300"></span>
-        <span class="dot w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-pink-300 transition-all duration-300"></span>
-        <span class="dot w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-pink-300 transition-all duration-300"></span>
-    </div>
-</div>
-
-<!-- Photo Grid -->
-<div class="relative">
-    <!-- Constrained width container for narrower photos -->
-    <div class="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 max-w-xs sm:max-w-sm md:max-w-md mx-auto">
-        <!-- Photo Card 1 -->
-        <div class="flip-card w-full h-48 sm:h-56 md:h-64" onclick="flipCard(this, 'photo1')">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="assets/picture1.jpeg" class="rounded-xl sm:rounded-2xl object-cover w-full h-full shadow-lg"/>
-                </div>
-                <div class="flip-card-back bg-gradient-to-br from-pink-400 to-pink-600 rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4 flex items-center justify-center">
-                    <p class="text-white text-[10px] sm:text-xs md:text-sm font-medium leading-snug text-center">You make me smile! 💖</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Photo Card 2 -->
-        <div class="flip-card w-full h-48 sm:h-56 md:h-64" onclick="flipCard(this, 'photo2')">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="assets/picture2.jpeg" class="rounded-xl sm:rounded-2xl object-cover w-full h-full shadow-lg"/>
-                </div>
-                <div class="flip-card-back bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4 flex items-center justify-center">
-                    <p class="text-white text-[10px] sm:text-xs md:text-sm font-medium leading-snug text-center">Extraordinary memories! 🌟</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Photo Card 3 -->
-        <div class="flip-card w-full h-48 sm:h-56 md:h-64" onclick="flipCard(this, 'photo3')">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="assets/picture3.jpeg" class="rounded-xl sm:rounded-2xl object-cover w-full h-full shadow-lg"/>
-                </div>
-                <div class="flip-card-back bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4 flex items-center justify-center">
-                    <p class="text-white text-[10px] sm:text-xs md:text-sm font-medium leading-snug text-center">Your loyalty means everything! 💕</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Photo Card 4 -->
-        <div class="flip-card w-full h-48 sm:h-56 md:h-64" onclick="flipCard(this, 'photo4')">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="assets/picture4.jpeg" class="rounded-xl sm:rounded-2xl object-cover w-full h-full shadow-lg"/>
-                </div>
-                <div class="flip-card-back bg-gradient-to-br from-fuchsia-400 to-fuchsia-600 rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4 flex items-center justify-center">
-                    <p class="text-white text-[10px] sm:text-xs md:text-sm font-medium leading-snug text-center">You inspire me! ✨</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- See Memories Button - Centered Below Grid -->
-    <div class="flex justify-center mt-3 sm:mt-4">
-        <a href="memories.html"
-             class="inline-block px-5 py-2 sm:px-7 sm:py-3 md:px-9 md:py-3
-          rounded-full text-xs sm:text-sm md:text-base font-semibold shadow-2xl
-          bg-pink-500 text-white glow-button
-          hover:bg-gradient-to-r hover:from-pink-500 hover:to-pink-400
-          hover:scale-105 active:scale-95 transition-all duration-500 z-20">
-             See our memories 💌
-        </a>
-    </div>
-</div>
-
-</main>
-
-<style>
-/* Background gradient animation - PINK THEME */
-body.animate-bg {
-    background: linear-gradient(120deg, #fecdd3, #fda4af, #fb7185, #f472b6, #ec4899);
-    background-size: 400% 400%;
-    animation: bgShift 12s ease infinite;
-}
-@keyframes bgShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Fade in animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.animate-fadeIn { animation: fadeIn 1.3s ease forwards; }
-
-/* Glowing button effect */
-.glow-button {
-    animation: glow 2s ease-in-out infinite;
-}
-@keyframes glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.5); }
-    50% { box-shadow: 0 0 30px rgba(236, 72, 153, 0.8), 0 0 40px rgba(236, 72, 153, 0.6); }
-}
-
-/* Flip Card Styles */
-.flip-card {
-    perspective: 1000px;
-    cursor: pointer;
-}
-
-.flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-}
-
-.flip-card.flipped .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
-.flip-card-back {
-    transform: rotateY(180deg);
-}
-
-/* Quote carousel animation */
-@keyframes slideIn {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-.quote-text {
-    animation: slideIn 0.8s ease;
-}
-
-.dot.active {
-    background-color: #ec4899;
-    transform: scale(1.3);
-}
-
-/* Floating hearts */
-.hearts span {
-    position: absolute;
-    bottom: -30px;
-    font-size: 18px;
-    animation: floatUpRotate 8s linear infinite;
-    opacity: 0.7;
-}
-
-@media (min-width: 640px) {
-    .hearts span {
-        font-size: 24px;
-    }
-}
-
-@keyframes floatUpRotate {
-    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
-    30% { opacity: 0.8; }
-    100% { transform: translateY(-120vh) rotate(360deg) scale(1.4); opacity: 0; }
-}
-
-/* Floating stars */
-.stars span {
-    position: absolute;
-    bottom: -30px;
-    font-size: 16px;
-    animation: starFloat 9s linear infinite;
-    opacity: 0.75;
-}
-
-@media (min-width: 640px) {
-    .stars span {
-        font-size: 20px;
-    }
-}
-
-@keyframes starFloat {
-    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
-    30% { opacity: 0.9; }
-    100% { transform: translateY(-120vh) rotate(-360deg) scale(1.5); opacity: 0; }
-}
-
-/* Floating sparkles */
-.sparkles span {
-    position: absolute;
-    font-size: 8px;
-    color: #fffacd;
-    opacity: 0.8;
-    animation: sparkleFloat 5s linear infinite;
-}
-
-@media (min-width: 640px) {
-    .sparkles span {
-        font-size: 10px;
-    }
-}
-
-@keyframes sparkleFloat {
-    0% { transform: translateY(0) scale(0.5); opacity: 0; }
-    50% { opacity: 0.9; }
-    100% { transform: translateY(-100vh) scale(1); opacity: 0; }
-}
-</style>
-
-<script>
-// Quote Carousel
-const quotes = [
-    "\"A true friend sees the pain in your eyes.\" 💕",
-    "\"Friends are the family we choose.\" 🫶",
-    "\"Good friends are like stars.\" ⭐",
-    "\"Life is better with you by my side.\" 💖"
-];
-
-let currentQuote = 0;
-const quoteText = document.querySelector('.quote-text');
-const dots = document.querySelectorAll('.dot');
-
-function updateQuote() {
-    quoteText.style.opacity = '0';
-    
-    setTimeout(() => {
-        quoteText.textContent = quotes[currentQuote];
-        quoteText.style.opacity = '1';
-        
-        // Update dots
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentQuote);
-        });
-        
-        currentQuote = (currentQuote + 1) % quotes.length;
-    }, 300);
-}
-
-// Initialize first quote
-updateQuote();
-setInterval(updateQuote, 4000);
-
-// Flip Card Function with Confetti and Sound
-function flipCard(card, photoId) {
-    card.classList.toggle('flipped');
-    
-    // Play click sound
-    const clickSound = document.getElementById('clickSound');
-    clickSound.currentTime = 0;
-    clickSound.play().catch(() => {}); // Ignore if sound fails
-    
-    // Trigger confetti
-    if (!card.classList.contains('flipped')) {
-        createConfetti(card);
-    }
-}
-
-// Confetti Animation
-const canvas = document.getElementById('confettiCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
-
-function createConfetti(element) {
-    const rect = element.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    const confettiCount = window.innerWidth < 640 ? 20 : 30; // Less confetti on mobile
-    const confetti = [];
-    
-    const colors = ['#ec4899', '#f472b6', '#fb7185', '#fda4af', '#fbbf24', '#a78bfa'];
-    
-    for (let i = 0; i < confettiCount; i++) {
-        confetti.push({
-            x: centerX,
-            y: centerY,
-            vx: (Math.random() - 0.5) * 10,
-            vy: (Math.random() - 0.5) * 10 - 5,
-            color: colors[Math.floor(Math.random() * colors.length)],
-            size: Math.random() * 8 + 4,
-            rotation: Math.random() * 360,
-            rotationSpeed: (Math.random() - 0.5) * 10
-        });
-    }
-    
-    function animateConfetti() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        let stillAnimating = false;
-        
-        confetti.forEach((piece, index) => {
-            piece.vy += 0.3; // gravity
-            piece.x += piece.vx;
-            piece.y += piece.vy;
-            piece.rotation += piece.rotationSpeed;
-            
-            if (piece.y < canvas.height) {
-                stillAnimating = true;
-                
-                ctx.save();
-                ctx.translate(piece.x, piece.y);
-                ctx.rotate(piece.rotation * Math.PI / 180);
-                ctx.fillStyle = piece.color;
-                ctx.fillRect(-piece.size / 2, -piece.size / 2, piece.size, piece.size);
-                ctx.restore();
-            }
-        });
-        
-        if (stillAnimating) {
-            requestAnimationFrame(animateConfetti);
-        }
-    }
-    
-    animateConfetti();
-}
-
-// Floating hearts
-const heartsEmojis = ['💖', '💕', '💗', '💝', '💘'];
-const heartsContainer = document.querySelector('.hearts');
-
-function createHeart() {
-    const heart = document.createElement('span');
-    heart.textContent = heartsEmojis[Math.floor(Math.random() * heartsEmojis.length)];
-    heart.style.left = Math.random() * 100 + '%';
-    heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
-    heart.style.animationDelay = Math.random() * 2 + 's';
-    heartsContainer.appendChild(heart);
-    
-    setTimeout(() => heart.remove(), 10000);
-}
-
-setInterval(createHeart, 800);
-for (let i = 0; i < 5; i++) setTimeout(createHeart, i * 300);
-
-// Floating stars
-const starsEmojis = ['⭐', '✨', '🌟', '💫'];
-const starsContainer = document.querySelector('.stars');
-
-function createStar() {
-    const star = document.createElement('span');
-    star.textContent = starsEmojis[Math.floor(Math.random() * starsEmojis.length)];
-    star.style.left = Math.random() * 100 + '%';
-    star.style.animationDuration = (Math.random() * 5 + 7) + 's';
-    star.style.animationDelay = Math.random() * 2 + 's';
-    starsContainer.appendChild(star);
-    
-    setTimeout(() => star.remove(), 12000);
-}
-
-setInterval(createStar, 1000);
-for (let i = 0; i < 4; i++) setTimeout(createStar, i * 400);
-
-// Floating sparkles
-const sparklesContainer = document.querySelector('.sparkles');
-
-function createSparkle() {
-    const sparkle = document.createElement('span');
-    sparkle.textContent = '✨';
-    sparkle.style.left = Math.random() * 100 + '%';
-    sparkle.style.bottom = Math.random() * 100 + '%';
-    sparkle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-    sparklesContainer.appendChild(sparkle);
-    
-    setTimeout(() => sparkle.remove(), 6000);
-}
-
-setInterval(createSparkle, 600);
-for (let i = 0; i < 8; i++) setTimeout(createSparkle, i * 200);
-</script>
-
+  <script src="./index.js"></script>
 </body>
 </html>
