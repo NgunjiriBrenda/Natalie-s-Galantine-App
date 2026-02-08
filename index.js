@@ -216,3 +216,72 @@ const messages = [
     function closeModal() {
       document.getElementById("modal").classList.remove("active");
     }
+
+let clickCount = 0;
+
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            clickCount++;
+            
+            if (clickCount === 1) {
+                noBtn.textContent = "Are you sure? 🥺";
+            } else if (clickCount === 2) {
+                noBtn.textContent = "But... snacks! 🍿";
+            } else if (clickCount === 3) {
+                noBtn.textContent = "And gossip! ☕";
+            } else {
+                // Make the button disappear
+                noBtn.style.opacity = '0';
+                noBtn.style.pointerEvents = 'none';
+                
+                // Reappear in a random position after a short delay
+                setTimeout(() => {
+                    const x = (Math.random() - 0.5) * 300;
+                    const y = (Math.random() - 0.5) * 300;
+                    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+                    noBtn.style.opacity = '1';
+                    noBtn.style.pointerEvents = 'auto';
+                    
+                    // Change text randomly
+                    const texts = [
+                        "Nope! 😝",
+                        "Can't catch me! 🏃‍♀️",
+                        "Try again! 😜",
+                        "Almost! 😂",
+                        "Keep trying! 💨"
+                    ];
+                    noBtn.textContent = texts[Math.floor(Math.random() * texts.length)];
+                }, 300);
+            }
+        }
+
+        function yesAnswer() {
+            // Hide question section
+            document.getElementById('questionSection').classList.add('hidden');
+            
+            // Show success section
+            document.getElementById('successSection').classList.remove('hidden');
+            
+            // Trigger confetti
+            createConfetti();
+        }
+
+        function createConfetti() {
+            const colors = ['#ec4899', '#f472b6', '#fb7185', '#fda4af', '#fecdd3'];
+            const confettiContainer = document.getElementById('confettiContainer');
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    confettiContainer.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+   
+
