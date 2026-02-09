@@ -53,22 +53,22 @@
 <body class="animated-bg flex items-center justify-center min-h-screen p-4">
     <div id="confettiContainer" class="fixed inset-0 pointer-events-none"></div>
 
-    <div class="bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8 max-w-md w-full text-center">
+    <div class="bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center">
         <!-- Question Section -->
         <div id="questionSection">
-            <img src="https://media4.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MmRiMHYybTk3ejY4Z3l4aGgwZzRtc3dwNndqZ2R4eWRpbzF1NncxbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/cXYKQxjW1HLp2KMw09/giphy.webp" class="w-40 mx-auto rounded-xl shadow-lg"/>
+            <img src="https://media4.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MmRiMHYybTk3ejY4Z3l4aGgwZzRtc3dwNndqZ2R4eWRpbzF1NncxbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/cXYKQxjW1HLp2KMw09/giphy.webp" class="w-32 sm:w-40 mx-auto rounded-xl shadow-lg"/>
 
-            <h1 class="text-3xl font-bold text-pink-500 mt-6">
+            <h1 class="text-2xl sm:text-3xl font-bold text-pink-500 mt-4 sm:mt-6 px-2">
                 Nicole Will you be my Galentine? ❤️
             </h1>
-            <p class="text-gray-600 text-base mt-3">I promise snacks, gossip and memories too 😌</p>
+            <p class="text-gray-600 text-sm sm:text-base mt-2 sm:mt-3 px-2">I promise snacks, gossip and memories too 😌</p>
 
-            <div class="flex justify-center gap-4 mt-8">
-                <button onclick="yesAnswer()" class="pulse-animation bg-pink-600 text-white px-8 py-3 rounded-full font-semibold hover:scale-110 transition-all duration-300 shadow-lg">
+            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-6 sm:mt-8 px-2">
+                <button onclick="yesAnswer()" class="pulse-animation bg-pink-600 text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-semibold hover:scale-110 transition-all duration-300 shadow-lg">
                     Yes ❤️
                 </button>
 
-                <button id="noBtn" onclick="moveButton()" class="bg-gray-300 text-gray-700 px-8 py-3 rounded-full font-semibold hover:scale-105 transition-all duration-300 shadow-lg" style="transition: opacity 0.3s ease, transform 0.3s ease;">
+                <button id="noBtn" onclick="moveButton()" class="bg-gray-300 text-gray-700 px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg" style="transition: opacity 0.3s ease, transform 0.3s ease;">
                     No 😭
                 </button>
             </div>
@@ -76,20 +76,22 @@
 
         <!-- Success Section (Hidden initially) -->
         <div id="successSection" class="hidden">
-            <div class="text-7xl mb-4">🎉</div>
-            <img src="https://media.giphy.com/media/g5R9dok94mrIvplmZd/giphy.gif" class="w-56 h-56 mx-auto rounded-xl shadow-lg mb-4"/>
+            <div class="text-6xl sm:text-7xl mb-4">🎉</div>
+            <img src="https://media.giphy.com/media/g5R9dok94mrIvplmZd/giphy.gif" class="w-48 h-48 sm:w-56 sm:h-56 mx-auto rounded-xl shadow-lg mb-4"/>
             
-            <h1 class="text-3xl font-bold text-pink-600 mb-4">
+            <h1 class="text-2xl sm:text-3xl font-bold text-pink-600 mb-4">
                 Yaaay! 💖✨
             </h1>
             
-            <p class="text-gray-700 text-lg mb-4">
-                You just made my day bestie! Here's to snacks, gossip, and endless memories! 🌸💕
+            <p class="text-gray-700 text-base sm:text-lg mb-4 px-2">
+                Uiiiii aty ajeeee! 🌸💕
             </p>
             
-            <div class="text-5xl">
-                🎀💖🌟💕✨
-            </div>
+          
+            <!-- Back to Home Button -->
+            <a href="index.html" class="inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white px-6 py-3 rounded-full text-sm sm:text-base font-semibold shadow-lg hover:scale-105 active:scale-95 transition-all duration-300">
+                Back to Home 🏡💕
+            </a>
         </div>
     </div>
 
@@ -123,9 +125,9 @@
                     const texts = [
                         "Nope! 😝",
                         "Can't catch me! 🏃‍♀️",
-                        "Try again! 😜",
-                        "Almost! 😂",
-                        "Keep trying! 💨"
+                        "Ni mbaya! 😜",
+                        "kunywa brufen! 😂",
+                        "Woiyee! 💨"
                     ];
                     noBtn.textContent = texts[Math.floor(Math.random() * texts.length)];
                 }, 300);

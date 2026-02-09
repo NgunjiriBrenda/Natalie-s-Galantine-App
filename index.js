@@ -230,11 +230,11 @@ let clickCount = 0;
             } else if (clickCount === 3) {
                 noBtn.textContent = "And gossip! ☕";
             } else {
-                // Make the button disappear
+               
                 noBtn.style.opacity = '0';
                 noBtn.style.pointerEvents = 'none';
                 
-                // Reappear in a random position after a short delay
+                
                 setTimeout(() => {
                     const x = (Math.random() - 0.5) * 300;
                     const y = (Math.random() - 0.5) * 300;
